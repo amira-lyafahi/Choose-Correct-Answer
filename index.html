@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختاري الإجابة الصحيحة</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
+        body {
+            font-family: 'Amiri', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #007BFF, #00C6FF);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-top: 40px;
+            animation: fadeInDown 1s ease-in-out;
+        }
+
+        .images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin: 50px 0;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .images img {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, z-index 0.3s ease;
+        }
+
+        .images img.active {
+            transform: scale(2);
+            opacity: 1;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        .images img.inactive {
+            transform: scale(1);
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 1.5em;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body onclick="resetImages()">
+    <h1>اختاري الإجابة الصحيحة</h1>
+    <div class="images">
+        <img src="wrong.png" alt="إجابة خاطئة" id="wrong" onclick="selectImage('wrong', event)">
+        <img src="correct.png" alt="إجابة صحيحة" id="correct" onclick="selectImage('correct', event)">
+    </div>
+    <footer>
+        تصميم: أ. أميرة اليافعية
+    </footer>
+
+    <script>
+        function selectImage(selectedId, event) {
+            event.stopPropagation();
+            const correctImg = document.getElementById('correct');
+            const wrongImg = document.getElementById('wrong');
+
+            if (selectedId === 'correct') {
+                correctImg.classList.add('active');
+                correctImg.classList.remove('inactive');
+
+                wrongImg.classList.add('inactive');
+                wrongImg.classList.remove('active');
+            } else {
+                wrongImg.classList.add('active');
+                wrongImg.classList.remove('inactive');
+
+                correctImg.classList.add('inactive');
+                correctImg.classList.remove('active');
+            }
+        }
+
+        function resetImages() {
+            const correctImg = document.getElementById('correct');
+            const wrongImg = document.getElementById('wrong');
+
+            correctImg.classList.remove('active', 'inactive');
+            wrongImg.classList.remove('active', 'inactive');
+        }
+    </script>
+</body>
+</html>
